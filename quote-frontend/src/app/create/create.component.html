@@ -1,0 +1,6 @@
+<form [formGroup]="myForm" (ngSubmit)="addQuote()">
+    <label>Quote: <input formControlName="quote"> </label>
+    <label>Author: <input formControlName="author"> </label>
+    <label>Source: <input formControlName="source"> </label>
+    <button type="submit">Submit</button>
+</form>

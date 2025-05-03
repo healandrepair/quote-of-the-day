@@ -1,0 +1,11 @@
+<h2>View all quotes</h2>
+
+<div>
+    <ul>
+        <li *ngFor="let item of quoteList">
+            <h2>{{item.quote}}</h2>
+            <h3>{{item.author}}</h3>
+            <h4>{{item.source}}</h4>
+        </li>
+    </ul>
+</div>

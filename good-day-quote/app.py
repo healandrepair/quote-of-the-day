@@ -1,12 +1,13 @@
 from flask import Flask, render_template, jsonify, request
 import boto3
 import uuid
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:4200"}})
 
 dynamodb = boto3.resource('dynamodb', region_name='ap-southeast-2')  # Change region as needed
 table = dynamodb.Table('quotes')
-
 
 @app.route('/')
 def home():
