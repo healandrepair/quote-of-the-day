@@ -1,6 +1,8 @@
 from flask import Flask, render_template, jsonify, request
 import boto3
 import uuid
+import datetime
+import pytz;
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -21,8 +23,11 @@ def allQuotes():
 
     return jsonify(items)
 
-@app.route('/api/quotes', methods=['POST'])
+@app.route('/api/quotes', methods=['POST', 'OPTIONS'])
 def addQuote():
+    if request.method == 'OPTIONS':
+        return '', 204
+
     user_id = str(uuid.uuid4())
     data = request.json
 
@@ -35,7 +40,7 @@ def addQuote():
         'quote': data.get('quote', ''),
         'author': data.get('author', ''),
         'source': data.get('source', ''),
-    }
+        'timestamp': data.get('timestamp', datetime.datetime.now(pytz.timezone('Pacific/Auckland')).isoformat(),)    }
 
     table.put_item(Item=item)
 

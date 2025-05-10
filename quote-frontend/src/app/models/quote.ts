@@ -2,5 +2,6 @@ export interface Quote {
     quoteId : string,
     quote: string,
     author: string,
-    source: string
+    source: string,
+    timestamp: string
 }

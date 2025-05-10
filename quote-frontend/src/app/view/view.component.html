@@ -1,11 +1,21 @@
-<h2>View all quotes</h2>
-
-<div>
-    <ul>
-        <li *ngFor="let item of quoteList">
-            <h2>{{item.quote}}</h2>
-            <h3>{{item.author}}</h3>
-            <h4>{{item.source}}</h4>
-        </li>
-    </ul>
-</div>
+<div class="container">
+    <h1 class="text-align-center">View all quotes</h1>
+    <div class="d-flex">
+      <ul>
+        <div class="card" style="width: 18rem;" *ngFor="let item of quoteList; index as i">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.quote }}</h5>
+            <p class="card-text">{{ "@ " + item.author }}</p>
+            <button 
+              id="quoteButtonElement{{i}}" 
+              (click)="saveToClipboard(item.quote, 'quoteButtonElement' + i)" 
+              data-bs-toggle="tooltip" 
+              data-bs-title="Copied to clipboard" 
+              class="btn btn-success">
+              Save quote
+            </button>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>

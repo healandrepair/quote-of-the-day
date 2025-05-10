@@ -1,6 +1,8 @@
-<nav>
-  <button (click)="navigateTo('/home')">Home</button>
-  <button (click)="navigateTo('/view')">View Quotes</button>
-  <button (click)="navigateTo('/create')">Post a quote</button>
+<nav class="d-flex justify-content-center align-items-center">
+  <div class="m-3">
+    <button class="btn btn-secondary btn-lg me-2" (click)="navigateTo('/home')">Home</button>
+    <button class="btn btn-secondary btn-lg me-2" (click)="navigateTo('/view')">View Quotes</button>
+    <button class="btn btn-secondary btn-lg" (click)="navigateTo('/create')">Post a quote</button>
+  </div>
 </nav>
 <router-outlet />
