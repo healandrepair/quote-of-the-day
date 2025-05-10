@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, throwError, timestamp } from 'rxjs';
 import { Quote } from './models/quote';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuoteService {
+  private apiUrl = environment.apiBaseUrl;
   constructor(private http: HttpClient) { }
 
   postQuote(quote: string, author: string, source: string) {
@@ -18,18 +20,18 @@ export class QuoteService {
     console.log("posting quote", body)
 
 
-    return this.http.post<void>('http://127.0.0.1:5000/api/quotes', body).subscribe({
+    return this.http.post<void>(`${this.apiUrl}/quotes`, body).subscribe({
       next: () => console.log("Quote added successfully"),
       error: () => console.log("Error adding quote")
     });
   }
 
   getQuotes(): Observable<Quote[]> {
-    return this.http.get<Quote[]>('http://127.0.0.1:5000/api/quotes');
+    return this.http.get<Quote[]>(`${this.apiUrl}/quotes`);
   }
 
   getQuotesByTimestampDesc(): Observable<Quote[]> {
-    return this.http.get<Quote[]>('http://127.0.0.1:5000/api/quotes').pipe(
+    return this.http.get<Quote[]>(`${this.apiUrl}/quotes`).pipe(
       map((quotes) =>
         quotes.sort((a, b) => {
           const timeA = a.timestamp ? new Date(a.timestamp).getTime() : 0; // Default to 0 if timestamp is missing
