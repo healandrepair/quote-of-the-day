@@ -27,10 +27,13 @@ export class QuoteService {
   }
 
   getQuotes(): Observable<Quote[]> {
+    console.log("api url "+ this.apiUrl)
     return this.http.get<Quote[]>(`${this.apiUrl}/quotes`);
   }
 
   getQuotesByTimestampDesc(): Observable<Quote[]> {
+    console.log("api url "+ this.apiUrl)
+
     return this.http.get<Quote[]>(`${this.apiUrl}/quotes`).pipe(
       map((quotes) =>
         quotes.sort((a, b) => {
