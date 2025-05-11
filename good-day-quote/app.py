@@ -3,12 +3,19 @@ import boto3
 import uuid
 import datetime
 import pytz;
+import os
+
+
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "http://localhost:4200"}})
+# CORS(app, resources={r"/api/*": {"origins": "http://localhost:4200"}})
+CORS(app, resources={r"/api/*": {"origins": "https://healandrepair.github.io"}})
 
-dynamodb = boto3.resource('dynamodb', region_name='ap-southeast-2')  # Change region as needed
+dynamodb = boto3.resource('dynamodb',
+                          region_name='ap-southeast-2',
+                          aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
+                            aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"))  # Change region as needed
 table = dynamodb.Table('quotes')
 
 @app.route('/')
